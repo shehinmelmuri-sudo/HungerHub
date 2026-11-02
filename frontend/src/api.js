@@ -1,15 +1,25 @@
-const BASE = 'http://localhost:8080/api'
+
+const BASE = (import.meta.env.VITE_API_URL || 'https://hungerhub-backend-huln.onrender.com/api').replace(/\/$/, '')
+
 export async function api(path, options = {}) {
   const response = await fetch(`${BASE}${path}`, {
     ...options,
-    headers: { 'Content-Type': 'application/json', ...(options.headers || {}) }
+    headers: {
+      'Content-Type': 'application/json',
+      ...(options.headers || {})
+    }
   })
+
   if (!response.ok) {
     let message = 'Something went wrong'
-    try { message = (await response.json()).message || message } catch {}
+    try {
+      message = (await response.json()).message || message
+    } catch {}
     throw new Error(message)
   }
+
   if (response.status === 204) return null
   return response.json()
 }
+
 export const money = n => `₹${Number(n || 0).toFixed(2)}`
