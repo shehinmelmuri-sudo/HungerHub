@@ -1,4 +1,3 @@
-
 const BASE = (import.meta.env.VITE_API_URL || 'https://hungerhub-backend-huln.onrender.com/api').replace(/\/$/, '')
 
 export async function api(path, options = {}) {
