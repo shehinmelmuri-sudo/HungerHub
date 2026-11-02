@@ -1,4 +1,5 @@
-const BASE = (import.meta.env.VITE_API_URL || 'https://hungerhub-backend-huln.onrender.com/api').replace(/\/$/, '')
+
+const BASE = 'https://hungerhub-backend-huln.onrender.com/api'
 
 export async function api(path, options = {}) {
   const response = await fetch(`${BASE}${path}`, {
